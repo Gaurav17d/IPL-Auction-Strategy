@@ -1,0 +1,47 @@
+batsman,total_runs,seasons_played,dismissed,average,,,,
+KL Rahul,2647,7,62,42,,,,select  * from iplballs 
+AB de Villiers,4849,12,114,42,,,,
+CH Gayle,4772,11,116,41,,,,create table iplmatches (
+JP Duminy,2029,9,49,41,,,,"id int ,"
+DA Warner,5254,11,126,41,,,,date date ) ;
+LMP Simmons,1079,3,27,39,,,,
+KS Williamson,1619,5,41,39,,,,select * from iplmatches ;
+OA Shah,506,3,13,38,,,,
+MEK Hussey,1977,7,52,38,,,," copy iplmatches from 'C:\Program Files\PostgreSQL\16\data\Data-Resource\Data\IPL_matches.csv' delimiter ',' csv header ;"
+SE Marsh,2477,9,64,38,,,, 
+,,,,,,,, select * from iplmatches ;
+,,,,,,,, 
+,,,,,,,, create table batsman as 
+,,,,,,,, (  select 
+,,,,,,,," a.id ,"
+,,,,,,,," a.batsman,"
+,,,,,,,," a.batsman_runs,"
+,,,,,,,," a.is_wicket ,"
+,,,,,,,, b.date 
+,,,,,,,, from 
+,,,,,,,, iplballs as a 
+,,,,,,,, inner join 
+,,,,,,,, iplmatches as b
+,,,,,,,, on 
+,,,,,,,, a.id =b.id  );
+,,,,,,,, 
+,,,,,,,, select * from batsman ;
+,,,,,,,, 
+,,,,,,,, 
+,,,,,,,, SELECT 
+,,,,,,,,"    batsman,"
+,,,,,,,,"    SUM(batsman_runs) AS total_runs,"
+,,,,,,,,"    EXTRACT(YEAR FROM MAX(date)) - EXTRACT(YEAR FROM MIN(date)) AS seasons_played,"
+,,,,,,,,"COUNT(CASE WHEN is_wicket = '1' THEN 1 ELSE NULL END) AS dismissed,"
+,,,,,,,,    (SUM(batsman_runs) / COUNT(CASE WHEN is_wicket = '1' THEN 1 ELSE NULL END)) AS average
+,,,,,,,,    
+,,,,,,,,FROM 
+,,,,,,,,    batsman
+,,,,,,,,GROUP BY 
+,,,,,,,,    batsman
+,,,,,,,,HAVING 
+,,,,,,,,    EXTRACT(YEAR FROM MAX(date)) - EXTRACT(YEAR FROM MIN(date)) > 2 
+,,,,,,,,    AND COUNT(CASE WHEN is_wicket = '1' THEN 1 ELSE NULL END) > 1
+,,,,,,,,ORDER BY 
+,,,,,,,,    average DESC
+,,,,,,,,limit 10 ;

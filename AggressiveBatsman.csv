@@ -1,0 +1,11 @@
+batsman,total_runs,total_balls_faced,strike_rate,,,,
+AD Russell,1517,832,182,,,,"SELECT batsman, SUM(batsman_runs) AS total_runs, count(ball) AS total_balls_faced,"
+SP Narine,892,543,164,,,,(sum (batsman_runs)*100 / count (ball) ) as strike_rate 
+HH Pandya,1349,847,159,,,,FROM iplballs
+V Sehwag,2728,1755,155,,,,WHERE  not extras_type = 'wides'
+GJ Maxwell,1505,973,154,,,,GROUP BY batsman
+RR Pant,2079,1368,151,,,,HAVING count(ball) >= 500
+AB de Villiers,4849,3192,151,,,,order by strike_rate desc
+CH Gayle,4772,3179,150,,,,limit 10 ;
+JC Buttler,1714,1146,149,,,,
+KA Pollard,3023,2017,149,,,,

@@ -1,0 +1,11 @@
+bowler,total_balls,total_runs,economy,,,,,
+Rashid Khan,1490,1573,105,,,,,select * from iplballs ;
+A Kumble,983,1089,110,,,,,
+M Muralitharan,1577,1755,111,,,,,select * from (
+DW Steyn,2276,2568,112,,,,,
+R Ashwin,3327,3756,112,,,,,"select distinct  bowler , count (ball) as total_balls ,  sum (total_runs) as total_runs, (sum (total_runs)*100 /count (ball)) as economy"
+DL Vettori,785,894,113,,,,,from iplballs
+SP Narine,2824,3208,113,,,,,
+Washington Sundar,660,758,114,,,,,group by bowler order by economy ) where total_balls > 500 limit 10  ; 
+J Botha,709,818,115,,,,,
+R Tewatia,587,684,116,,,,,
